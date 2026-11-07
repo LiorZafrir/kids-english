@@ -1,0 +1,27 @@
+.story-art {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-2);
+}
+.story-en {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-2);
+  font-size: 2rem;
+  font-weight: 800;
+}
+.story-word {
+  border: 0;
+  border-bottom: 3px dashed var(--border);
+  background: none;
+  padding: 0 4px;
+  color: var(--primary-dark);
+  font-size: inherit;
+  font-weight: inherit;
+}
+.story-word:active {
+  background: var(--surface-2);
+}

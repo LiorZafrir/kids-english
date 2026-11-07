@@ -1,0 +1,115 @@
+.event-banner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border: 2px solid;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+.muted {
+  margin: 0;
+  color: var(--text-muted);
+}
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-3);
+}
+.action {
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-4) var(--sp-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, var(--surface), var(--surface-2));
+  box-shadow: var(--shadow-1);
+  color: var(--text);
+  font-weight: 700;
+  text-align: center;
+}
+.action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.action:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.action small {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+.badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 800;
+}
+.unit-title {
+  margin: var(--sp-3) 0 0;
+  color: var(--text-muted);
+  font-size: var(--fs-body);
+}
+
+/* Magic Garden: big picture tiles, nothing to read. */
+.garden-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-4);
+}
+.flower {
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-4) var(--sp-2);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--surface), var(--surface-2));
+  box-shadow: var(--shadow-1);
+  color: var(--text);
+  font-weight: 800;
+  font-size: var(--fs-xl);
+}
+.flower:disabled {
+  opacity: 0.55;
+  filter: grayscale(0.6);
+}
+.flower:active:not(:disabled) {
+  transform: scale(0.96);
+}
+.flower .path__stars {
+  display: inline-flex;
+}
+.tile-big {
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--surface), var(--surface-2));
+  box-shadow: var(--shadow-1);
+  color: var(--text);
+  position: relative;
+}
+.tile-big .badge {
+  position: absolute;
+  top: 8px;
+  inset-inline-end: 8px;
+}
+
+.garden-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-3);
+}
+.garden-grid--3 .tile-big {
+  padding: var(--sp-3) var(--sp-2);
+}

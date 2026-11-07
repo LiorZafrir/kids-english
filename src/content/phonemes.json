@@ -1,0 +1,174 @@
+[
+  {
+    "id": "s",
+    "grapheme": "s",
+    "example": "sun",
+    "unit": 1,
+    "note": "Hissing 'sss'. Do NOT add a vowel (not 'suh')."
+  },
+  {
+    "id": "a",
+    "grapheme": "a",
+    "example": "apple",
+    "unit": 1,
+    "note": "Short a /æ/ as in cat. Not 'ah'."
+  },
+  {
+    "id": "t",
+    "grapheme": "t",
+    "example": "top",
+    "unit": 1,
+    "note": "Quick unvoiced 't', no 'tuh'."
+  },
+  {
+    "id": "p",
+    "grapheme": "p",
+    "example": "pig",
+    "unit": 1,
+    "note": "Quick puff of air, no 'puh'."
+  },
+  { "id": "i", "grapheme": "i", "example": "igloo", "unit": 1, "note": "Short i /ɪ/ as in sit." },
+  { "id": "n", "grapheme": "n", "example": "net", "unit": 1, "note": "Hum 'nnn', no 'nuh'." },
+
+  {
+    "id": "k",
+    "grapheme": "c / k",
+    "example": "cat",
+    "unit": 2,
+    "note": "Hard 'k' as in cat/kit. No 'kuh'."
+  },
+  { "id": "e", "grapheme": "e", "example": "egg", "unit": 2, "note": "Short e /ɛ/ as in bed." },
+  { "id": "h", "grapheme": "h", "example": "hat", "unit": 2, "note": "Breathy 'h', no 'huh'." },
+  { "id": "r", "grapheme": "r", "example": "rat", "unit": 2, "note": "American 'rrr', no 'ruh'." },
+  { "id": "m", "grapheme": "m", "example": "man", "unit": 2, "note": "Hum 'mmm', no 'muh'." },
+  {
+    "id": "d",
+    "grapheme": "d",
+    "example": "dog",
+    "unit": 2,
+    "note": "Quick voiced 'd', no 'duh'."
+  },
+
+  { "id": "g", "grapheme": "g", "example": "goat", "unit": 3, "note": "Hard 'g', no 'guh'." },
+  {
+    "id": "o",
+    "grapheme": "o",
+    "example": "octopus",
+    "unit": 3,
+    "note": "Short o /ɑ/ as in hot (American)."
+  },
+  {
+    "id": "u",
+    "grapheme": "u",
+    "example": "umbrella",
+    "unit": 3,
+    "note": "Short u /ʌ/ as in cup."
+  },
+  { "id": "l", "grapheme": "l", "example": "leg", "unit": 3, "note": "'lll', no 'luh'." },
+  {
+    "id": "f",
+    "grapheme": "f",
+    "example": "fan",
+    "unit": 3,
+    "note": "Teeth on lip 'fff', no 'fuh'."
+  },
+  {
+    "id": "b",
+    "grapheme": "b",
+    "example": "bat",
+    "unit": 3,
+    "note": "Quick voiced 'b', no 'buh'."
+  },
+
+  { "id": "j", "grapheme": "j", "example": "jam", "unit": 4, "note": "'j' as in jump, no 'juh'." },
+  {
+    "id": "w",
+    "grapheme": "w",
+    "example": "web",
+    "unit": 4,
+    "note": "Rounded lips 'w', no 'wuh'."
+  },
+  { "id": "v", "grapheme": "v", "example": "van", "unit": 4, "note": "Voiced 'vvv', no 'vuh'." },
+  { "id": "y", "grapheme": "y", "example": "yes", "unit": 4, "note": "Consonant 'y' as in yes." },
+  { "id": "z", "grapheme": "z", "example": "zip", "unit": 4, "note": "Buzzing 'zzz', no 'zuh'." },
+  { "id": "x", "grapheme": "x", "example": "box", "unit": 4, "note": "'ks' as in box." },
+  { "id": "qu", "grapheme": "qu", "example": "queen", "unit": 4, "note": "'kw' as in queen." },
+
+  { "id": "sh", "grapheme": "sh", "example": "ship", "unit": 5, "note": "'shhh' as in ship." },
+  { "id": "ch", "grapheme": "ch", "example": "chip", "unit": 5, "note": "'ch' as in chip." },
+  {
+    "id": "th-soft",
+    "grapheme": "th",
+    "example": "thin",
+    "unit": 5,
+    "note": "Unvoiced th, tongue between teeth (thin)."
+  },
+  {
+    "id": "th-voiced",
+    "grapheme": "th",
+    "example": "this",
+    "unit": 5,
+    "note": "Voiced th (this, that)."
+  },
+  { "id": "ng", "grapheme": "ng", "example": "ring", "unit": 5, "note": "'ng' as in ring." },
+
+  {
+    "id": "ai",
+    "grapheme": "ai / ay",
+    "example": "rain",
+    "unit": 6,
+    "note": "Long a /eɪ/ as in rain."
+  },
+  {
+    "id": "ee",
+    "grapheme": "ee / ea",
+    "example": "feet",
+    "unit": 6,
+    "note": "Long e /i/ as in feet."
+  },
+  {
+    "id": "ie",
+    "grapheme": "igh / ie",
+    "example": "night",
+    "unit": 6,
+    "note": "Long i /aɪ/ as in night."
+  },
+  {
+    "id": "oa",
+    "grapheme": "oa / ow",
+    "example": "boat",
+    "unit": 6,
+    "note": "Long o /oʊ/ as in boat."
+  },
+  {
+    "id": "oo-long",
+    "grapheme": "oo",
+    "example": "moon",
+    "unit": 6,
+    "note": "Long oo /u/ as in moon."
+  },
+  {
+    "id": "oo-short",
+    "grapheme": "oo",
+    "example": "book",
+    "unit": 6,
+    "note": "Short oo /ʊ/ as in book."
+  },
+  { "id": "ar", "grapheme": "ar", "example": "car", "unit": 6, "note": "American 'ar' as in car." },
+  {
+    "id": "or",
+    "grapheme": "or",
+    "example": "fork",
+    "unit": 6,
+    "note": "American 'or' as in fork."
+  },
+  {
+    "id": "er",
+    "grapheme": "er / ir / ur",
+    "example": "bird",
+    "unit": 6,
+    "note": "R-colored vowel as in bird."
+  },
+  { "id": "ow", "grapheme": "ow / ou", "example": "cow", "unit": 6, "note": "/aʊ/ as in cow." },
+  { "id": "oi", "grapheme": "oi / oy", "example": "coin", "unit": 6, "note": "/ɔɪ/ as in coin." }
+]

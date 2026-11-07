@@ -1,0 +1,44 @@
+.companion-hero {
+  position: relative;
+  overflow: hidden;
+}
+.companion-hero::before {
+  content: '';
+  position: absolute;
+  inset: -30% -10% 40%;
+  background: radial-gradient(circle, var(--glow), transparent 65%);
+  pointer-events: none;
+}
+.companion-hero > * {
+  position: relative;
+}
+.muted {
+  margin: 0;
+  color: var(--text-muted);
+}
+.shop {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--sp-2);
+}
+.shop__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+.shop__name {
+  display: grid;
+  font-weight: 700;
+}
+.shop__name small {
+  font-weight: 400;
+  color: var(--text-muted);
+}
