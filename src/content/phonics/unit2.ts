@@ -10,24 +10,45 @@ export const UNIT2_KEYWORDS: Record<string, KeywordDef> = {
   d: { word: 'dog', picture: 'dog' },
 };
 
+const w = (
+  text: string,
+  sounds: string[],
+  picture?: WordDef['picture'],
+  letters?: string[],
+): WordDef => ({
+  id: text,
+  text,
+  sounds,
+  ...(letters ? { letters } : {}),
+  ...(picture ? { picture } : {}),
+});
+
 export const UNIT2_WORDS: WordDef[] = [
-  { id: 'cat', text: 'cat', sounds: ['k', 'a', 't'], letters: ['c', 'a', 't'], picture: 'cat' },
-  { id: 'hat', text: 'hat', sounds: ['h', 'a', 't'], picture: 'hat' },
-  { id: 'rat', text: 'rat', sounds: ['r', 'a', 't'], picture: 'rat' },
-  { id: 'hen', text: 'hen', sounds: ['h', 'e', 'n'], picture: 'hen' },
-  { id: 'man', text: 'man', sounds: ['m', 'a', 'n'], picture: 'man' },
-  { id: 'map', text: 'map', sounds: ['m', 'a', 'p'], picture: 'map' },
+  w('cat', ['k', 'a', 't'], 'cat', ['c', 'a', 't']),
+  w('hat', ['h', 'a', 't'], 'hat'),
+  w('hen', ['h', 'e', 'n'], 'hen'),
+  w('kit', ['k', 'i', 't']),
+  w('rat', ['r', 'a', 't'], 'rat'),
+  w('man', ['m', 'a', 'n'], 'man'),
+  w('map', ['m', 'a', 'p'], 'map'),
+  w('red', ['r', 'e', 'd']),
+  w('men', ['m', 'e', 'n']),
+  w('ham', ['h', 'a', 'm']),
+  w('him', ['h', 'i', 'm']),
+  w('dim', ['d', 'i', 'm']),
+  w('kid', ['k', 'i', 'd']),
+  w('den', ['d', 'e', 'n']),
+  w('mat', ['m', 'a', 't']),
 ];
 
 export const UNIT2_LESSONS: LessonDef[] = [
-  { id: 'u2-l1', unit: 2, introduces: ['k', 'e'], words: ['cat'] },
-  { id: 'u2-l2', unit: 2, introduces: ['h', 'r'], words: ['hat', 'rat', 'hen'] },
-  { id: 'u2-l3', unit: 2, introduces: ['m', 'd'], words: ['man', 'map'] },
+  { id: 'u2-l1', unit: 2, introduces: ['k', 'e', 'h'], words: ['cat', 'hat', 'hen', 'kit'] },
+  { id: 'u2-l2', unit: 2, introduces: ['r', 'm', 'd'], words: ['rat', 'man', 'map', 'red', 'dim'] },
   {
-    id: 'u2-l4',
+    id: 'u2-l3',
     unit: 2,
     introduces: [],
-    words: ['cat', 'hat', 'rat', 'hen', 'man', 'map'],
+    words: ['mat', 'ham', 'him', 'kid', 'den', 'men', 'cat', 'hen'],
     review: true,
   },
 ];

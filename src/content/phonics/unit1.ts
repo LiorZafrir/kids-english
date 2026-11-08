@@ -8,22 +8,44 @@ import type { KeywordDef, LessonDef, WordDef } from './types';
 export const UNIT1_KEYWORDS: Record<string, KeywordDef> = {
   s: { word: 'sun', picture: 'sun' },
   a: { word: 'apple', picture: 'apple' },
-  t: { word: 'top', picture: 'top' },
+  t: { word: 'tiger', picture: 'tiger' },
   p: { word: 'pig', picture: 'pig' },
-  i: { word: 'igloo', picture: 'igloo' },
-  n: { word: 'net', picture: 'net' },
+  i: { word: 'insect', picture: 'insect' },
+  n: { word: 'nut', picture: 'nut' },
 };
 
+const w = (text: string, sounds: string[], picture?: WordDef['picture']): WordDef => ({
+  id: text,
+  text,
+  sounds,
+  ...(picture ? { picture } : {}),
+});
+
 export const UNIT1_WORDS: WordDef[] = [
-  { id: 'pin', text: 'pin', sounds: ['p', 'i', 'n'], picture: 'pin' },
-  { id: 'pan', text: 'pan', sounds: ['p', 'a', 'n'], picture: 'pan' },
-  { id: 'tap', text: 'tap', sounds: ['t', 'a', 'p'], picture: 'tap' },
-  { id: 'ant', text: 'ant', sounds: ['a', 'n', 't'], picture: 'ant' },
+  w('at', ['a', 't']),
+  w('as', ['a', 's']),
+  w('sat', ['s', 'a', 't']),
+  w('pin', ['p', 'i', 'n'], 'pin'),
+  w('pan', ['p', 'a', 'n'], 'pan'),
+  w('tap', ['t', 'a', 'p'], 'tap'),
+  w('ant', ['a', 'n', 't'], 'ant'),
+  w('nap', ['n', 'a', 'p']),
+  w('sip', ['s', 'i', 'p']),
+  w('tip', ['t', 'i', 'p']),
+  w('sit', ['s', 'i', 't']),
+  w('pit', ['p', 'i', 't']),
+  w('pat', ['p', 'a', 't']),
+  w('tin', ['t', 'i', 'n']),
 ];
 
 export const UNIT1_LESSONS: LessonDef[] = [
-  { id: 'u1-l1', unit: 1, introduces: ['s', 'a'], words: [] },
-  { id: 'u1-l2', unit: 1, introduces: ['t', 'p'], words: ['tap'] },
-  { id: 'u1-l3', unit: 1, introduces: ['i', 'n'], words: ['pin', 'pan'] },
-  { id: 'u1-l4', unit: 1, introduces: [], words: ['pin', 'pan', 'tap', 'ant'], review: true },
+  { id: 'u1-l1', unit: 1, introduces: ['s', 'a', 't'], words: ['at', 'sat', 'as'] },
+  { id: 'u1-l2', unit: 1, introduces: ['p', 'i', 'n'], words: ['pin', 'pan', 'tap', 'nap', 'sip'] },
+  {
+    id: 'u1-l3',
+    unit: 1,
+    introduces: [],
+    words: ['ant', 'tin', 'sit', 'pit', 'tip', 'pat', 'pin', 'pan'],
+    review: true,
+  },
 ];

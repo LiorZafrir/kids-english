@@ -9,7 +9,7 @@ import { Button } from '@/ui/Button';
 import { CardFace } from '@/art/CardFace';
 import type { FinishSummary } from '@/app/store';
 import type { Step } from './buildLesson';
-import { Blend, Pick, Teach } from './steps';
+import { Blend, Build, Pick, Teach } from './steps';
 import './lessons.css';
 
 export interface RunResult {
@@ -39,7 +39,7 @@ export function Runner({ steps, onDone, backTo = '/home' }: RunnerProps) {
   useEffect(() => stopAudio, []);
 
   const step = steps[index];
-  const canContinue = !step || step.type !== 'pick' || solved;
+  const canContinue = !step || (step.type !== 'pick' && step.type !== 'build') || solved;
 
   const advance = () => {
     setSolved(false);
@@ -86,6 +86,17 @@ export function Runner({ steps, onDone, backTo = '/home' }: RunnerProps) {
 
       {step.type === 'teach' && <Teach key={index} phoneme={step.phoneme} />}
       {step.type === 'blend' && <Blend key={index} step={step} />}
+      {step.type === 'build' && (
+        <Build
+          key={index}
+          step={step}
+          onWrong={() => (mistakes.current += 1)}
+          onSolved={(firstTry) => {
+            results.current.push({ item: `w:${step.word}`, firstTry });
+            setSolved(true);
+          }}
+        />
+      )}
       {step.type === 'pick' && (
         <Pick
           key={index}

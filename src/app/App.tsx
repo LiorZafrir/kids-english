@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { useEffect, type ReactNode } from 'react';
+import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { setMuted } from '@/core/audio/player';
 import { he } from '@/core/i18n/he';
 import { Button } from '@/ui/Button';
+import { Gallery } from '@/features/dev/Gallery';
 import { Battle } from '@/features/battle/Battle';
 import { CardsPage } from '@/features/cards/CardsPage';
 import { CompanionPage } from '@/features/companion/CompanionPage';
@@ -30,6 +31,15 @@ function useTheme() {
   }, [world, highContrast]);
 }
 
+/**
+ * Remounts its child on every navigation, even to the same route. Without it a button like
+ * "another battle" or "next lesson" (same route, new params) keeps the old finished state.
+ */
+function Fresh({ children }: { children: ReactNode }) {
+  const { key } = useLocation();
+  return <div key={key}>{children}</div>;
+}
+
 export function App() {
   const { status, boot, loadError, signOut } = useSession();
   useEffect(() => {
@@ -39,6 +49,8 @@ export function App() {
   const muted = useSession((s) => s.settings.muted);
   useEffect(() => setMuted(muted), [muted]);
 
+  // Dev-only art sheet, reachable without signing in.
+  if (import.meta.env.DEV && location.hash === '#/gallery') return <Gallery />;
   if (status === 'booting') return <p className="page">{he.common.loading}</p>;
   if (status === 'signed-out') return <AuthScreen />;
   if (status === 'error') {
@@ -65,14 +77,49 @@ export function App() {
         <Route path="/" element={<ProfilePicker />} />
         <Route path="/profiles/new" element={<CreateProfile />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/lesson/:lessonId" element={<LessonPlayer />} />
-        <Route path="/review" element={<ReviewPlayer />} />
-        <Route path="/placement" element={<Placement />} />
-        <Route path="/battle" element={<Battle />} />
+        <Route
+          path="/lesson/:lessonId"
+          element={
+            <Fresh>
+              <LessonPlayer />
+            </Fresh>
+          }
+        />
+        <Route
+          path="/review"
+          element={
+            <Fresh>
+              <ReviewPlayer />
+            </Fresh>
+          }
+        />
+        <Route
+          path="/placement"
+          element={
+            <Fresh>
+              <Placement />
+            </Fresh>
+          }
+        />
+        <Route
+          path="/battle"
+          element={
+            <Fresh>
+              <Battle />
+            </Fresh>
+          }
+        />
         <Route path="/cards" element={<CardsPage />} />
         <Route path="/companion" element={<CompanionPage />} />
         <Route path="/story" element={<StoryList />} />
-        <Route path="/story/:chapterId" element={<StoryReader />} />
+        <Route
+          path="/story/:chapterId"
+          element={
+            <Fresh>
+              <StoryReader />
+            </Fresh>
+          }
+        />
         <Route path="/parent" element={<ParentGate />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

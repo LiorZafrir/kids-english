@@ -7,7 +7,8 @@ import { play, playSequence } from '@/core/audio/player';
 import { he } from '@/core/i18n/he';
 import { Ltr } from '@/core/i18n/Ltr';
 import { Button } from '@/ui/Button';
-import type { Option, SayRef, Step } from './buildLesson';
+import { SpellWord } from '@/features/battle/SpellWord';
+import type { Option, PickStep, SayRef, Step } from './buildLesson';
 import './lessons.css';
 
 export function sayRef(ref: SayRef) {
@@ -95,7 +96,7 @@ export function Blend({ step }: { step: Extract<Step, { type: 'blend' }> }) {
         </Button>
       </div>
       <div className="teach__kw">
-        <Picture id={step.picture} size={96} label={pictureLabel(step.picture)} />
+        {step.picture && <Picture id={step.picture} size={96} label={pictureLabel(step.picture)} />}
         <Ltr as="span" className="teach__word">
           {text}
         </Ltr>
@@ -104,29 +105,76 @@ export function Blend({ step }: { step: Extract<Step, { type: 'blend' }> }) {
   );
 }
 
-function OptionFace({ option }: { option: Option }) {
-  if (option.kind === 'letter') {
-    return (
-      <Ltr as="span" className="opt__letter">
-        {option.text}
-      </Ltr>
-    );
-  }
-  return <Picture id={option.id} size={76} label={pictureLabel(option.id)} />;
+/** Spell the word from tiles; the child sees a picture (if any) and hears the word. */
+export function Build({
+  step,
+  onWrong,
+  onSolved,
+}: {
+  step: Extract<Step, { type: 'build' }>;
+  onWrong: () => void;
+  onSolved: (firstTry: boolean) => void;
+}) {
+  const [wrongs, setWrongs] = useState(0);
+  return (
+    <div className="card stack step">
+      <h2>{he.lesson.spellTitle}</h2>
+      <SpellWord
+        word={step.word}
+        mode="hear"
+        picture={step.picture}
+        onWrong={() => {
+          setWrongs((n) => n + 1);
+          onWrong();
+        }}
+        onDone={() => onSolved(wrongs === 0)}
+      />
+    </div>
+  );
 }
 
-export function promptFor(step: Extract<Step, { type: 'pick' }>): string {
+function OptionFace({ option, index }: { option: Option; index: number }) {
+  switch (option.kind) {
+    case 'letter':
+      return (
+        <Ltr as="span" className="opt__letter">
+          {option.text}
+        </Ltr>
+      );
+    case 'word':
+      return (
+        <Ltr as="span" className="opt__word">
+          {option.text}
+        </Ltr>
+      );
+    case 'sound':
+      return (
+        <>
+          <Speaker size={44} />
+          <span className="opt__num" aria-hidden="true">
+            {index + 1}
+          </span>
+        </>
+      );
+    case 'picture':
+      return <Picture id={option.id} size={76} label={pictureLabel(option.id)} />;
+  }
+}
+
+export function promptFor(step: PickStep): string {
+  const kinds = new Set(step.options.map((o) => o.kind));
+  if (kinds.has('sound')) return he.lesson.whichSound;
+  if (kinds.has('word'))
+    return step.showPicture ? he.lesson.whichWordForPicture : he.lesson.whichWordHeard;
   if (step.show) return he.lesson.whichPictureForWord;
   if (step.say && 'phoneme' in step.say) {
-    return step.options.some((o) => o.kind === 'letter')
-      ? he.lesson.whichLetter
-      : he.lesson.whichPicture;
+    return kinds.has('letter') ? he.lesson.whichLetter : he.lesson.whichPicture;
   }
   return he.lesson.whichPictureForSound;
 }
 
 interface PickProps {
-  step: Extract<Step, { type: 'pick' }>;
+  step: PickStep;
   /** Called on every wrong tap. */
   onWrong: () => void;
   /** Called once when the right option is tapped; firstTry is true when nothing was missed. */
@@ -150,10 +198,13 @@ export function Pick({ step, onWrong, onSolved, quiet = false }: PickProps) {
 
   const choose = (i: number) => {
     if (solved || wrong.includes(i)) return;
+    const option = step.options[i];
+    // A sound button is also how the child listens: they hear it as they choose.
+    if (option?.kind === 'sound') void play(resolvePhoneme(option.phoneme));
     if (i === step.correct) {
       setSolved(true);
       onSolved(wrong.length === 0);
-      say?.();
+      if (option?.kind !== 'sound') say?.();
     } else {
       setWrong([...wrong, i]);
       onWrong();
@@ -168,6 +219,7 @@ export function Pick({ step, onWrong, onSolved, quiet = false }: PickProps) {
           {step.show}
         </Ltr>
       )}
+      {step.showPicture && <Picture id={step.showPicture} size={112} />}
       {say && <ListenButton onClick={say} label={he.lesson.listenAgain} />}
       <div className="opts" role="group" aria-label={prompt}>
         {step.options.map((o, i) => {
@@ -179,8 +231,9 @@ export function Pick({ step, onWrong, onSolved, quiet = false }: PickProps) {
               className={`opt${state ? ` opt--${state}` : ''}`}
               onClick={() => choose(i)}
               disabled={state === 'bad'}
+              aria-label={o.kind === 'sound' ? he.lesson.tapToHear : undefined}
             >
-              <OptionFace option={o} />
+              <OptionFace option={o} index={i} />
               {state === 'ok' && (
                 <span className="opt__badge">
                   <Check size={22} />

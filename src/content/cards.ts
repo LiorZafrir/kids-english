@@ -5,8 +5,8 @@ export type Rarity = 'common' | 'rare' | 'epic' | 'event';
 export type CardArt =
   | { kind: 'picture'; id: PictureId }
   | { kind: 'monster'; id: MonsterId }
-  | { kind: 'companion'; stage: 'baby' | 'kid' | 'hero' }
-  | { kind: 'star'; color: string };
+  /** Any illustration from public/art by file name. */
+  | { kind: 'asset'; slug: string };
 
 export type MonsterId = 'gloop' | 'spike' | 'zorb';
 
@@ -20,9 +20,9 @@ export interface CardDef {
 export const CARDS: CardDef[] = [
   { id: 'c-sun', nameHe: 'שמש חמה', rarity: 'common', art: { kind: 'picture', id: 'sun' } },
   { id: 'c-apple', nameHe: 'תפוח אדום', rarity: 'common', art: { kind: 'picture', id: 'apple' } },
-  { id: 'c-top', nameHe: 'סביבון', rarity: 'common', art: { kind: 'picture', id: 'top' } },
+  { id: 'c-tiger', nameHe: 'נמר', rarity: 'common', art: { kind: 'picture', id: 'tiger' } },
   { id: 'c-pig', nameHe: 'חזרזיר', rarity: 'common', art: { kind: 'picture', id: 'pig' } },
-  { id: 'c-igloo', nameHe: 'איגלו', rarity: 'common', art: { kind: 'picture', id: 'igloo' } },
+  { id: 'c-insect', nameHe: 'חרק', rarity: 'common', art: { kind: 'picture', id: 'insect' } },
   { id: 'c-cat', nameHe: 'חתול', rarity: 'common', art: { kind: 'picture', id: 'cat' } },
   { id: 'c-dog', nameHe: 'כלב', rarity: 'common', art: { kind: 'picture', id: 'dog' } },
   { id: 'c-hen', nameHe: 'תרנגולת', rarity: 'common', art: { kind: 'picture', id: 'hen' } },
@@ -34,21 +34,31 @@ export const CARDS: CardDef[] = [
     rarity: 'rare',
     art: { kind: 'monster', id: 'zorb' },
   },
+  { id: 'e-hero', nameHe: 'חד קרן אגדי', rarity: 'epic', art: { kind: 'asset', slug: 'unicorn' } },
   {
-    id: 'e-hero',
-    nameHe: 'פאפבלום הגיבור',
+    id: 'e-star',
+    nameHe: 'כוכב הזהב',
     rarity: 'epic',
-    art: { kind: 'companion', stage: 'hero' },
+    art: { kind: 'asset', slug: 'glowing-star' },
   },
-  { id: 'e-star', nameHe: 'כוכב הזהב', rarity: 'epic', art: { kind: 'star', color: '#facc15' } },
-  { id: 'ev-winter', nameHe: 'פתית שלג', rarity: 'event', art: { kind: 'star', color: '#38bdf8' } },
-  { id: 'ev-spring', nameHe: 'פרח אביב', rarity: 'event', art: { kind: 'star', color: '#f472b6' } },
-  { id: 'ev-summer', nameHe: 'טיפת קיץ', rarity: 'event', art: { kind: 'star', color: '#fb923c' } },
+  {
+    id: 'ev-winter',
+    nameHe: 'פתית שלג',
+    rarity: 'event',
+    art: { kind: 'asset', slug: 'snowflake' },
+  },
+  {
+    id: 'ev-spring',
+    nameHe: 'פרח אביב',
+    rarity: 'event',
+    art: { kind: 'asset', slug: 'cherry-blossom' },
+  },
+  { id: 'ev-summer', nameHe: 'שמש קיץ', rarity: 'event', art: { kind: 'asset', slug: 'sun' } },
   {
     id: 'ev-autumn',
     nameHe: 'עלה סתווי',
     rarity: 'event',
-    art: { kind: 'star', color: '#f59e0b' },
+    art: { kind: 'asset', slug: 'maple-leaf' },
   },
 ];
 

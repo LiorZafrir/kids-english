@@ -217,7 +217,7 @@ describe('placement', () => {
 });
 
 describe('session builders', () => {
-  const learned = learnedBy('u2-l4');
+  const learned = learnedBy('u2-l3');
 
   it('battle questions come only from learned content and kindergarten never reads', () => {
     for (const grade of ['kg', 2] as const) {
@@ -225,7 +225,8 @@ describe('session builders', () => {
       expect(steps.length).toBeGreaterThan(0);
       for (const s of steps) {
         if (s.type !== 'pick') throw new Error('battle must only ask questions');
-        if (grade === 'kg') expect(s.options.every((o) => o.kind === 'picture')).toBe(true);
+        if (grade === 'kg')
+          expect(s.options.every((o) => o.kind === 'picture' || o.kind === 'sound')).toBe(true);
       }
     }
   });

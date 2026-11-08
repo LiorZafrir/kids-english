@@ -16,7 +16,7 @@
   {
     "id": "t",
     "grapheme": "t",
-    "example": "top",
+    "example": "tiger",
     "unit": 1,
     "note": "Quick unvoiced 't', no 'tuh'."
   },
@@ -27,8 +27,8 @@
     "unit": 1,
     "note": "Quick puff of air, no 'puh'."
   },
-  { "id": "i", "grapheme": "i", "example": "igloo", "unit": 1, "note": "Short i /ɪ/ as in sit." },
-  { "id": "n", "grapheme": "n", "example": "net", "unit": 1, "note": "Hum 'nnn', no 'nuh'." },
+  { "id": "i", "grapheme": "i", "example": "insect", "unit": 1, "note": "Short i /ɪ/ as in sit." },
+  { "id": "n", "grapheme": "n", "example": "nut", "unit": 1, "note": "Hum 'nnn', no 'nuh'." },
 
   {
     "id": "k",

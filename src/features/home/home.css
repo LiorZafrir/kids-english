@@ -113,3 +113,48 @@
 .garden-grid--3 .tile-big {
   padding: var(--sp-3) var(--sp-2);
 }
+
+.home-hero--row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+}
+.home-hero--row h1 {
+  margin: 0;
+  font-size: var(--fs-xl);
+}
+.battle-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  border: 0;
+  border-bottom: 6px solid var(--primary-dark);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--primary-top), var(--primary));
+  color: var(--on-primary);
+  box-shadow: 0 14px 28px -12px var(--glow);
+  text-align: start;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.battle-banner:active:not(:disabled) {
+  transform: translateY(3px);
+  border-bottom-width: 3px;
+}
+.battle-banner:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.battle-banner__text {
+  display: grid;
+  gap: 2px;
+}
+.battle-banner strong {
+  font-size: var(--fs-xl);
+}
+.battle-banner small {
+  font-size: var(--fs-body);
+  opacity: 0.9;
+}

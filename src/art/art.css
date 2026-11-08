@@ -1,0 +1,40 @@
+.art {
+  display: block;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 4px 5px rgb(30 27 75 / 0.25));
+}
+
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 -6px 14px rgb(0 0 0 / 0.08),
+    0 0 0 3px #fff,
+    0 6px 14px rgb(30 27 75 / 0.22);
+  overflow: hidden;
+}
+.avatar .art {
+  width: 82%;
+  height: 82%;
+  filter: drop-shadow(0 3px 3px rgb(0 0 0 / 0.2));
+}
+
+.companion {
+  position: relative;
+  display: inline-block;
+  flex: none;
+}
+.companion > .art {
+  width: 100%;
+  height: 100%;
+}
+.companion__wear {
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+  pointer-events: none;
+}

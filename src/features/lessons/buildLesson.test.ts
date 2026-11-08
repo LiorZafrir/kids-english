@@ -54,13 +54,13 @@ describe('buildLesson', () => {
     }
   });
 
-  it('kindergarten never needs to read: no letter options and no shown words', () => {
+  it('kindergarten never needs to read: only pictures and sound buttons, no text', () => {
     for (const lesson of UNIT1_LESSONS) {
       for (const s of buildLesson(lesson.id, 'kg', seeded(3))) {
         if (s.type !== 'pick') continue;
         expect(s.show).toBeUndefined();
         expect(s.say).toBeDefined();
-        expect(s.options.every((o) => o.kind === 'picture')).toBe(true);
+        expect(s.options.every((o) => o.kind === 'picture' || o.kind === 'sound')).toBe(true);
       }
     }
   });
@@ -68,7 +68,40 @@ describe('buildLesson', () => {
   it('readers get letter options', () => {
     const steps = buildLesson('u1-l1', 2, seeded(5));
     const letterPicks = steps.filter((s) => s.type === 'pick' && s.options[0]?.kind === 'letter');
-    expect(letterPicks.length).toBe(2);
+    expect(letterPicks.length).toBe(3);
+  });
+
+  it('lessons are long and varied, not one question type on repeat', () => {
+    for (const lesson of UNIT1_LESSONS) {
+      const steps = buildLesson(lesson.id, 2, seeded(8));
+      expect(steps.length, lesson.id).toBeGreaterThanOrEqual(14);
+      const formats = new Set(
+        steps.map((s) =>
+          s.type === 'pick' ? `pick:${s.options[0]?.kind}:${s.show ? 'show' : ''}` : s.type,
+        ),
+      );
+      expect(formats.size, lesson.id).toBeGreaterThanOrEqual(4);
+    }
+  });
+
+  it('readers spell words, kindergarten never does and never meets picture-less words', () => {
+    for (const lesson of UNIT1_LESSONS) {
+      expect(
+        buildLesson(lesson.id, 2, seeded(6)).some((s) => s.type === 'build'),
+        lesson.id,
+      ).toBe(true);
+      const kg = buildLesson(lesson.id, 'kg', seeded(6));
+      expect(kg.some((s) => s.type === 'build')).toBe(false);
+      for (const s of kg) if (s.type === 'blend') expect(s.picture).toBeDefined();
+    }
+  });
+
+  it('written-word choices are confusable words, never the same word twice', () => {
+    for (const s of buildLesson('u1-l2', 4, seeded(13), { distractors: 3 })) {
+      if (s.type !== 'pick' || s.options[0]?.kind !== 'word') continue;
+      const texts = s.options.map((o) => (o.kind === 'word' ? o.text : ''));
+      expect(new Set(texts).size).toBe(texts.length);
+    }
   });
 
   it('unknown lesson yields no steps', () => {

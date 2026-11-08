@@ -1,7 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useSession } from '@/app/store';
 import { Avatar } from '@/art/Avatar';
-import { Heart, Lock, Sword } from '@/art/icons';
+import { Companion } from '@/art/Companion';
+import { CardsIcon, ReviewIcon, StoryIcon } from '@/art/HomeIcons';
+import { Lock } from '@/art/icons';
+import { Monster } from '@/art/Monster';
 import { Star } from '@/art/Star';
 import { LESSONS } from '@/content/phonics';
 import { he } from '@/core/i18n/he';
@@ -11,8 +14,8 @@ import { Button } from '@/ui/Button';
 import { EventBanner, FamilyGoalCard, StatusPills } from './parts';
 import '@/features/lessons/lessons.css';
 
-/** Battles need decodable words, so they open after the third lesson. */
-const BATTLE_UNLOCK = 'u1-l3';
+/** Battles need decodable words, so they open after the second lesson. */
+const BATTLE_UNLOCK = 'u1-l2';
 
 export function ArenaHome({ profile }: { profile: Profile }) {
   const navigate = useNavigate();
@@ -23,12 +26,14 @@ export function ArenaHome({ profile }: { profile: Profile }) {
 
   return (
     <main className="page stack">
-      <div className="card stack home-hero">
-        <Avatar id={profile.avatar} size={110} />
-        <h1>
-          {he.home.hello}, {profile.name}!
-        </h1>
-        <StatusPills profile={profile} />
+      <div className="card home-hero home-hero--row">
+        <Avatar id={profile.avatar} size={92} />
+        <div className="stack" style={{ gap: 'var(--sp-2)' }}>
+          <h1>
+            {he.home.hello}, {profile.name}!
+          </h1>
+          <StatusPills profile={profile} />
+        </div>
       </div>
 
       <EventBanner />
@@ -47,25 +52,28 @@ export function ArenaHome({ profile }: { profile: Profile }) {
         </section>
       )}
 
+      <button
+        type="button"
+        className="battle-banner"
+        disabled={!battleOpen}
+        onClick={() => navigate('/battle')}
+      >
+        <span className="battle-banner__text">
+          <strong>{he.home.battle}</strong>
+          <small>{battleOpen ? he.home.battleHint : he.home.battleLocked}</small>
+        </span>
+        {battleOpen ? <Monster id="spike" size={92} /> : <Lock size={44} />}
+      </button>
+
       <div className="actions">
-        <button
-          type="button"
-          className="action"
-          disabled={!battleOpen}
-          onClick={() => navigate('/battle')}
-        >
-          {battleOpen ? <Sword size={36} /> : <Lock size={36} />}
-          {he.home.battle}
-          {!battleOpen && <small>{he.home.battleLocked}</small>}
-        </button>
         <button
           type="button"
           className="action"
           disabled={due === 0}
           onClick={() => navigate('/review')}
         >
-          <Heart size={36} />
-          {he.home.review}
+          <ReviewIcon size={56} />
+          <span>{he.home.review}</span>
           {due > 0 ? <span className="badge">{due}</span> : <small>{he.home.reviewNone}</small>}
         </button>
         <button
@@ -74,16 +82,16 @@ export function ArenaHome({ profile }: { profile: Profile }) {
           disabled={!storyOpen}
           onClick={() => navigate('/story')}
         >
-          <Star size={36} />
-          {he.home.story}
+          <StoryIcon size={56} />
+          <span>{he.home.story}</span>
         </button>
         <button type="button" className="action" onClick={() => navigate('/companion')}>
-          <Star size={36} />
-          {he.home.companion}
+          <Companion stage={profile.companion.stage} equipped={profile.equipped} size={56} />
+          <span>{he.home.companion}</span>
         </button>
         <button type="button" className="action" onClick={() => navigate('/cards')}>
-          <Star size={36} />
-          {he.home.cards}
+          <CardsIcon size={56} />
+          <span>{he.home.cards}</span>
         </button>
       </div>
 

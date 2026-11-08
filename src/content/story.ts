@@ -23,7 +23,7 @@ export interface Chapter {
 export const CHAPTERS: Chapter[] = [
   {
     id: 'ch1',
-    unlockLesson: 'u1-l3',
+    unlockLesson: 'u1-l2',
     titleHe: 'המכתב הראשון',
     pages: [
       {
@@ -36,7 +36,7 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'ch2',
-    unlockLesson: 'u1-l4',
+    unlockLesson: 'u1-l3',
     titleHe: 'הנמלה הקטנה',
     pages: [
       {
@@ -70,7 +70,7 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'ch4',
-    unlockLesson: 'u2-l4',
+    unlockLesson: 'u2-l3',
     titleHe: 'המפה של האיש',
     pages: [
       {

@@ -1,10 +1,10 @@
 export type PictureId =
   | 'sun'
   | 'apple'
-  | 'top'
+  | 'tiger'
   | 'pig'
-  | 'igloo'
-  | 'net'
+  | 'insect'
+  | 'nut'
   | 'pin'
   | 'pan'
   | 'tap'
@@ -30,7 +30,8 @@ export interface WordDef {
   sounds: string[];
   /** Letters shown on the blending tiles when they differ from the sound ids (c for /k/). */
   letters?: string[];
-  picture: PictureId;
+  /** Words without a picture are for readers only (spelling, reading, listening). */
+  picture?: PictureId;
 }
 
 export interface LessonDef {

@@ -1,21 +1,14 @@
 import { cardById, type CardDef, type Rarity } from '@/content/cards';
 import { he } from '@/core/i18n/he';
-import { Companion } from './Companion';
 import { Monster } from './Monster';
-import { Picture } from './Picture';
-import { Star } from './Star';
+import { Art, Picture } from './Picture';
 import './card.css';
 
-function Art({ card }: { card: CardDef }) {
+function CardArt({ card }: { card: CardDef }) {
   const a = card.art;
   if (a.kind === 'picture') return <Picture id={a.id} size={92} />;
   if (a.kind === 'monster') return <Monster id={a.id} size={96} />;
-  if (a.kind === 'companion') return <Companion stage={a.stage} size={100} />;
-  return (
-    <span className="card-star" style={{ background: a.color }}>
-      <Star size={56} />
-    </span>
-  );
+  return <Art slug={a.slug} size={92} />;
 }
 
 const RARITY_HE: Record<Rarity, string> = {
@@ -33,7 +26,7 @@ export function CardFace({ id, owned = 1 }: { id: string; owned?: number }) {
   return (
     <figure className={`tcard tcard--${card.rarity}${locked ? ' tcard--locked' : ''}`}>
       <div className="tcard__art">
-        <Art card={card} />
+        <CardArt card={card} />
       </div>
       <figcaption>
         <span className="tcard__name">{locked ? '?' : card.nameHe}</span>
